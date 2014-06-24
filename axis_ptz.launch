@@ -1,0 +1,25 @@
+<launch>
+  <group ns="axis">
+    <param name="hostname" value="192.168.0.64:8082" />
+     <param name="username" value="root" />
+    <param name="password" value="drrobot" />
+    <param name="width" value="704" />
+    <param name="height" value="480" />
+    <node pkg="axis_cameraHK" type="axis.py" name="axis_ptz_view" >
+	 <remap from="image_raw/compressed" to="image_raw_ptz/compressed" />
+    </node>
+    <node pkg="axis_cameraHK" type="axis_ptz.py" name="axis_ptz" />
+  </group>
+
+  <!-- Viewer window -->
+<!--  <node pkg="image_view" type="image_view" name="image_view2">
+    <remap from="image" to="axis/image_raw_ptz" />
+    <param name="image_transport" value="compressed" />
+  </node>
+-->
+  <!-- To control the PTZ, issue commands like so:
+  rostopic pub /axis/cmd axis_camera/Axis '{ brightness: 5000, pan: 100, tilt: 10, zoom: 0, autofocus: True }'
+  NOTE: Don't forget to populate the brightness field, or
+        you'll get very dark images.
+  -->
+</launch>

@@ -1,0 +1,15 @@
+<launch>
+  <group ns="axis">
+    <node pkg="axis_cameraHK" type="axis.py" name="axis">
+      <param name="hostname" value="192.168.0.65:8081" />
+      <param name="username" value="root" />
+      <param name="password" value="drrobot" />
+    </node>
+  </group>
+<!-- Viewer window -->
+  <node pkg="image_view" type="image_view" name="image_view">
+   <remap from="image" to="axis/image_raw" />
+    <param name="image_transport" value="compressed" />
+  </node>
+</launch>
+
